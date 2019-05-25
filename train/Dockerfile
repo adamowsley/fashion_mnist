@@ -10,8 +10,6 @@ RUN pip3 install -r requirements.txt
 
 COPY . /opt/app
 
-ENV PYTHON_PACKAGES="\
-    numpy \
-    matplotlib"
+ENV PYTHON_PACKAGES="numpy matplotlib"
 
 CMD ["python3", "fashion_train.py"]

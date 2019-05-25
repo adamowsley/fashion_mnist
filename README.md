@@ -12,7 +12,9 @@ This repository consist of two sub projects...
 
 ## Train
 
+`docker build -t adamowsley/fashion_train:0.1 .`
 
+`docker run -u $(id -u):$(id -g) --runtime=nvidia -it --rm -v $PWD:/opt/app adamowsley/fashion_train:0.1`
 
 
 
