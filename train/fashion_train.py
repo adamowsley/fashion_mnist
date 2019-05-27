@@ -37,13 +37,13 @@ model = keras.Sequential()
 # Specify the input_shape once for only one image (not 60000 images)
 model.add(keras.layers.Conv2D(64, (3, 3), activation='relu', input_shape=(28, 28, 1)))
 
-# Pooling/Subsampling/Downsampling reduces the dimensionality of our feature maps; ours is a
-# 2 x 2 matrix. Note one of the benefits of convolution and pooling when viewing the display of the 
+# Pooling/Sub sampling/Down sampling reduces the dimensionality of our feature maps; ours is a
+# 2 x 2 matrix. Note one of the benefits of convolution and pooling when viewing the display of the
 # model summary below; we are reducing the number of inputs. Think about how this affects large
 # images and computation/train/predict times.
 model.add(keras.layers.MaxPooling2D((2, 2)))
 
-# Dropout is a method to help prevent overfitting. Nodes can be dropped which reduces the number of nodes
+# Dropout is a method to help prevent over fitting. Nodes can be dropped which reduces the number of nodes
 # that need to be trained.
 model.add(keras.layers.Dropout(0.05))
 
@@ -54,7 +54,7 @@ model.add(keras.layers.Dropout(0.1))
 
 # Specify third layer
 model.add(keras.layers.Conv2D(64, (3, 3), activation='relu'))
-model.add(keras.layers.Dropout(0.1))
+model.add(keras.layers.Dropout(0.12))
 
 # Feed the last output tensor of shape (3, 3, 64) into one or more dense layers to perform the classification.
 # Dense layers take the flattened 1D input.
@@ -80,7 +80,7 @@ model.compile(optimizer='adam',
 
 # Train using the images and their corresponding labels
 # epochs lets us select how many training runs we'll use
-train_model = model.fit(train_images, train_labels, epochs=3)
+trained_model = model.fit(train_images, train_labels, epochs=10)
 
 # Evaluate the model using the test images and corresponding labels
 test_loss, test_acc = model.evaluate(test_images, test_labels)
@@ -92,3 +92,16 @@ print("Test accuracy: {0:3.2f}%".format(test_acc*100))
 model.save("trained_model.h5")
 
 print("Save trained model to trained_model.h5")
+
+# The data sets available for plotting are accuracy and loss
+print(trained_model.history.keys())
+
+# Plot accuracy and loss values contained in the trained model
+plt.rcdefaults()
+plt.plot(trained_model.history['accuracy'])
+plt.plot(trained_model.history['loss'])
+plt.title('Model Training History')
+plt.ylabel('Accuracy/Loss')
+plt.minorticks_on()
+plt.xlabel('Epoch')
+plt.savefig("model_history")

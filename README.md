@@ -9,12 +9,15 @@ database. The fashion database contains 60,000 training images and 10,000 test a
 images.
 
 This code repository itself consists of two sub projects that use Docker images for all processing, and each 
-sub project consist of or uses the following items:
+sub project consists of or uses the following items:
 
 1. tensorflow/tensorflow:2.0.0a0-gpu-py3 Docker image
 2. Dockerfile that details our development environment
 3. requirements.txt that details dependencies for our development environment
 4. Fashion MNIST Dataset
+
+As you can see, we are using a Docker image for this, so there is no need to install TensorFlow
+on your host machine.
 
 ### Operating System
 
